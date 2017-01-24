@@ -7,10 +7,6 @@
     </div>
     <div class="form-group">
       <label for="Description">Description</label>
-      <textarea class="form-control" rows="3" name="description" placeholder="Category description ...">{{ isset($category) ? $category->description : old('category') }}</textarea>
-    </div>
-    <div class="form-group">
-      <label for="Description">Description</label>
       <textarea class="form-control" rows="3" maxlength="300" name="description" placeholder="Category description ...">{{ isset($category) ? $category->description : old('category') }}</textarea>
     </div>
   <!-- /.box-body -->

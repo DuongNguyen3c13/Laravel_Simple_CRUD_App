@@ -12,13 +12,11 @@
       <!-- does not word -->
 	    @if(isset($categories))
 			   @foreach($categories as $category)
-           @if ($category->id == Input::old('category_id') )
-                 <option value="{{ $category->id }}" selected>{{  $category->name }}</option>
-           @else
-                 <option value="{{ $category->id }}">{{  $category->name }}</option>
-           @endif
-  				    <!-- <option value="{{ $category->id }}" {{ old('category_id') == $category->id 
-                                                  ? "selected":"" }}>{{ $category->name }}</option> -->
+              @if (isset($product) && $category->id == $product->category_id)
+                   <option value="{{ $category->id }}" selected>{{  $category->name }}</option>
+              @else
+                   <option value="{{ $category->id }}">{{  $category->name }}</option>
+              @endif
 	       @endforeach
 		  @endif
 	      </select>

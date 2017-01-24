@@ -19,6 +19,6 @@
 <!-- store url -->
 <form role="form" action="{{ url('backend/categories') }}" method="POST" >
 		{{ csrf_field() }}
-		@include('backend.category._form')
+		@include('backend.product._form')
 </form>
 @stop

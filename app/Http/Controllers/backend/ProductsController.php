@@ -6,6 +6,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
 
 class ProductsController extends Controller
 {
@@ -27,7 +28,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('backend.product.create', compact('categories'));
     }
 
     /**
