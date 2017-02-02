@@ -1,24 +1,22 @@
 @extends('backend.master')
 
 @section('title')
-	<title>Add Products</title>
+	<title>Add new product</title>
 @stop
 
-@section('content-header')
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-      <h1>
-        Add a new product
-      </h1>
-    </section>
+@section('box-header')
+	<div class="box-header with-border">
+      <h3 class="box-title">Add a new product</h3>
+	</div>
+    <!-- /.box-header -->
 @stop
 
 @section('content')
 
 <!-- form start -->
-<!-- store url -->
-<form role="form" action="{{ url('backend/categories') }}" method="POST" >
+<form role="form" action="{{ url('backend/products') }}" method="POST" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		@include('backend.product._form')
 </form>
 @stop
+

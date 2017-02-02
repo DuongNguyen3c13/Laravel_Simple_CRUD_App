@@ -11,13 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+//frontend login
+
+Route::get('/', 'frontend\ProductsController@index');
+Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+Route::get('/products', 'frontend\ProductsController@index');
+//products management
+Route::get('categories/{category}', 'frontend\CategoriesController@showProducts');
 
 //backend login
 Route::get('/backend/login', 'backend\Auth\LoginController@showLoginForm');
@@ -38,13 +44,12 @@ Route::group(['guard' => 'admin', 'middleware' => 'admin', 'prefix' => 'backend'
 	// Route::patch('/users/{user}','backend\UsersController@update');
 	// Route::delete('/users/{user}', 'backend\UsersController@destroy');
 	// Route::get('/users/{user}', 'backend\UsersController@show');
-
+	Route::get('/products/destroy/{product}', 'backend\ProductsController@destroy');
+	Route::resource('products', 'backend\ProductsController');
 	//categories management
 	Route::get('categories/destroy/{category}', 'backend\CategoriesController@destroy');
 	Route::resource('categories', 'backend\CategoriesController');
 
-    //products management
-    Route::resource('products', 'backend\ProductsController');
-	Route::resource('categories', 'backend\CategoriesController');
+    
 
 });

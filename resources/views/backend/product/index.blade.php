@@ -37,7 +37,11 @@
               <td>{{ $product->category->name }}</td>
               <td>{{ $product->name }}</td>
               <td>{{ $product->price }} $</td>
-              <td>{{ $product->sale_price }}</td>
+              @if($product->sale_price!=null)
+              <td>{{ $product->sale_price }} $</td>
+              @elseif($product->sale_price==null)
+                 <td>No discount price </td>
+             @endif
               <td>{{ $product->status }}</td>
               <td>
                 @if(isset($product->image))
