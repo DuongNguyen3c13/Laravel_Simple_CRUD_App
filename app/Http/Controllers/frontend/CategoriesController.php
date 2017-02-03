@@ -9,8 +9,9 @@ use App\Category;
 class CategoriesController extends Controller
 {
     public function showProducts($category) {
-    	$categories = Category::all();
     	$products = Category::find($category)->products;
-    	return view('frontend.index', compact('products', 'categories'));
+    	$currentCategory = Category::find($category);
+    	$categories = Category::all();
+    	return view('frontend.index', compact('products', 'categories', 'currentCategory'));
     }
 }

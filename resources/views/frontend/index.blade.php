@@ -18,14 +18,16 @@
 	<div class="container">
 		<div class="col-md-9">
 			<div class="mid-popular">
+			<!-- check if product found -->
 			@if($products->count() > 0)
+			<!-- display product information -->
 			@foreach($products as $product)
 				<div class="col-md-4 item-grid1 simpleCart_shelfItem">
 					<div class=" mid-pop">
 						<div class="pro-img">
-							<img src="{{ $product->image }}" class="img-responsive" alt="">
+							<img src="{{ asset($product->image) }}" class="img-responsive" alt="">
 							<div class="zoom-icon ">
-								<a class="picture" href="{{ $product->image }}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
+								<a class="picture" href="{{ asset($product->image) }}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
 							</div>
 						</div>
 						<div class="mid-1">
@@ -71,9 +73,15 @@
 				<ul class="menu-drop">
 				<li class="item1"><a href="{{ url('products') }}">All</a></li>
 				@foreach($categories as $category)
+					@if(isset($currentCategory) && $currentCategory == $category)
+					<li class="item{{$category->id}} active-page">
+						<a href="{{ url('categories', [$category->id]) }}">{{ $category->name }}</a>
+					</li>
+					@else
 					<li class="item{{$category->id}}">
 						<a href="{{ url('categories', [$category->id]) }}">{{ $category->name }}</a>
 					</li>
+					@endif
 				@endforeach
 				</ul>
 			</div>
