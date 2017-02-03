@@ -28,8 +28,8 @@
     </div>
 
     <div class="form-group">
-      <label for="Phone">Sale Price *</label>
-      <input type="text" class="form-control" name="price" maxlength="30"  value="{{ isset($product) ? $product->price : old('price') }}" placeholder="Price" required>
+      <label for="Phone">Sale Price </label>
+      <input type="text" class="form-control" name="sale_price" maxlength="30"  value="{{ isset($product) ? $product->sale_price : old('sale_price') }}" placeholder="Sale Price">
     </div>
 
     <div class="form-group">

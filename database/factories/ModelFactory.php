@@ -21,7 +21,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
-<<<<<<< HEAD
 
 
 $factory->define(App\Category::class, function (Faker\Generator $faker) {
@@ -30,11 +29,3 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
         'description' => "This is a sample text for category description . . .",
     ];
 });
-=======
-$factory->define(App\Category::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'description' => "This is a sample text for description of categories . . .",
-    ];
-});
->>>>>>> feature_crud_user

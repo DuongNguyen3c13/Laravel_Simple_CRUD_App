@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-<<<<<<< HEAD
-=======
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
->>>>>>> feature_crud_user
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -16,14 +13,8 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
-        factory(App\Category::class, 10)->create();
-=======
     	Model::unguard();
-
-		factory(Category::class, 100)->create();
-
+        factory(App\Category::class, 10)->create();
 		Model::reguard();	
->>>>>>> feature_crud_user
     }
 }
