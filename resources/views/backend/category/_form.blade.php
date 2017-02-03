@@ -3,11 +3,11 @@
   <div class="box-body">
     <div class="form-group">
       <label for="Name">Name *</label>
-      <input type="text" class="form-control" name="name" maxlength="255" value="{{ isset($category) ? $category->name :old('category') }}" placeholder="Name" required>
+      <input type="text" class="form-control" name="name" value="{{ isset($category) ? $category->name :old('category') }}" placeholder="Name">
     </div>
     <div class="form-group">
       <label for="Description">Description</label>
-      <textarea class="form-control" rows="3" maxlength="300" name="description" placeholder="Category description ...">{{ isset($category) ? $category->description : old('category') }}</textarea>
+      <textarea class="form-control" rows="3" maxlength="300" name="description" placeholder="Category description ...">{{ isset($category) ? $category->description : old('description') }}</textarea>
     </div>
   <!-- /.box-body -->
 

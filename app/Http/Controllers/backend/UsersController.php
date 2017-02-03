@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-
+use App\Http\Requests\StoreUsers;
 class UsersController extends Controller
 {
     /**
@@ -37,6 +37,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
+        ]);
         $user = new User();
         $user->email = $request->email;
         $user->password = $request->password;
@@ -78,6 +84,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$id,
+        ]);
         $user = User::find($id);
         $user->update($request->all());
         return redirect('/backend/users'); 

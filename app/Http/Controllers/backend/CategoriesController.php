@@ -37,6 +37,9 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            ]);
         $category = new Category;
         $category->name = $request->name;
         $category->description = $request->description;
@@ -65,6 +68,9 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            ]);
         $category = Category::find($id);
         $category->update($request->all());
         return redirect('/backend/categories');
