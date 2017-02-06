@@ -3,7 +3,7 @@
   <div class="box-body">
     <div class="form-group">
       <label for="Name">Name *</label>
-      <input type="text" class="form-control" name="name" maxlength="50" value="{{ isset($product->name) ? $product->name: old('name') }}" placeholder="Name" required>
+      <input type="text" class="form-control" name="name" maxlength="50" value="{{ isset($product->name) ? $product->name: old('name') }}" placeholder="Name">
     </div>
 
     <div class="form-group">
@@ -24,12 +24,17 @@
 
     <div class="form-group">
       <label for="Phone">Price *</label>
-      <input type="text" class="form-control" name="price" maxlength="30"  value="{{ isset($product) ? $product->price : old('price') }}" placeholder="Price" required>
+      <input type="text" class="form-control" name="price" maxlength="30"  value="{{ isset($product) ? $product->price : old('price') }}" placeholder="Price" >
     </div>
 
     <div class="form-group">
       <label for="Phone">Sale Price </label>
       <input type="text" class="form-control" name="sale_price" maxlength="30"  value="{{ isset($product) ? $product->sale_price : old('sale_price') }}" placeholder="Sale Price">
+    </div>
+    
+    <div class="form-group">
+      <label for="Description">Description</label>
+      <textarea class="form-control" rows="3" maxlength="500" name="description" placeholder="Product description ...">{{ isset($product) ? $product->description : old('description') }}</textarea>
     </div>
 
     <div class="form-group">

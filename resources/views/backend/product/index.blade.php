@@ -23,6 +23,7 @@
                   <th>Name</td>
                   <th>Price</td>
                   <th>Sale price</th>
+                  <th>Description</th>
                   <th>Status</th>
                   <th>Image</th>
                   <th></th>
@@ -36,12 +37,13 @@
               <td>{{ $product->id }}</td>
               <td>{{ $product->category->name }}</td>
               <td>{{ $product->name }}</td>
-              <td>{{ $product->price }} $</td>
+              <td>{{ $product->price }} $</td>    
               @if($product->sale_price!=null)
               <td>{{ $product->sale_price }} $</td>
               @elseif($product->sale_price==null)
                  <td>No discount price </td>
-             @endif
+             @endif          
+              <td>{{ $product->description }}</td>
               <td>{{ $product->status }}</td>
               <td>
                 @if(isset($product->image))

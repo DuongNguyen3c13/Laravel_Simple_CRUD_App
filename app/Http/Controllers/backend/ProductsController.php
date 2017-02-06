@@ -44,7 +44,12 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            //can not use alpha_dash
+            'name' => 'required|max:100|regex:/^[\pL\s\-]+$/u',
+            'price' => 'required|numeric|between:0,99',
+            'sale_price' => 'numeric',
+            'description' => 'required|max:300',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $product = new Product;
@@ -52,6 +57,7 @@ class ProductsController extends Controller
         $product->category_id = $request->category_id;  
         $product->price = $request->price;
         $product->sale_price = $request->sale_price;
+        $product->description = $request->description;
         $product->status = $request->status;
         if($request->file('image')!==null) :
             $image = $request->file('image');
@@ -90,7 +96,12 @@ class ProductsController extends Controller
     {
         //product validator 
         $this->validate($request, [
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            //can not use alpha_dash
+            'name' => 'required|max:100|regex:/^[\pL\s\-]+$/u',
+            'price' => 'required|numeric|between:0,99',
+            'sale_price' => 'numeric',
+            'description' => 'required|max:300',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
         //update product information
         $product = Product::find($id);
@@ -99,6 +110,7 @@ class ProductsController extends Controller
         $product->category_id = $request->category_id;
         $product->price = $request->price;
         $product->sale_price = $request->sale_price;
+        $product->description = $request->description;
         $product->status = $request->status;
         if($request->file('image')!==null) :
             File::delete(public_path($oldImage));
