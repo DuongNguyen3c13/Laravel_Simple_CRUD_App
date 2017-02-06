@@ -9,6 +9,8 @@ use App\Product;
 use App\Category;
 use Intervention\Image\ImageManagerStatic as Image;
 use File;
+use App\Http\Requests\StoreProducts;
+use App\Http\Requests\UpdateProducts;
 
 class ProductsController extends Controller
 {
@@ -41,17 +43,8 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProducts $request)
     {
-        $this->validate($request, [
-            //can not use alpha_dash
-            'name' => 'required|max:100|regex:/^[\pL\s\-]+$/u',
-            'price' => 'required|numeric|between:0,99',
-            'sale_price' => 'numeric',
-            'description' => 'required|max:300',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
-        ]);
-
         $product = new Product;
         $product->name = $request->name; 
         $product->category_id = $request->category_id;  
@@ -69,7 +62,7 @@ class ProductsController extends Controller
             $product->image = 'img/'.$imageName;
         endif;  
         $product->save();
-        return redirect('/backend/products');
+        return redirect('/backend/products')->with('message' , 'Product added !');
     }
 
     /**
@@ -92,17 +85,8 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProducts $request, $id)
     {
-        //product validator 
-        $this->validate($request, [
-            //can not use alpha_dash
-            'name' => 'required|max:100|regex:/^[\pL\s\-]+$/u',
-            'price' => 'required|numeric|between:0,99',
-            'sale_price' => 'numeric',
-            'description' => 'required|max:300',
-            'image' => 'image|mimes:jpeg,png,jpg,gif',
-        ]);
         //update product information
         $product = Product::find($id);
         $oldImage = $product->image;
@@ -111,6 +95,7 @@ class ProductsController extends Controller
         $product->price = $request->price;
         $product->sale_price = $request->sale_price;
         $product->description = $request->description;
+        // $product->description = str_limit($request->description);
         $product->status = $request->status;
         if($request->file('image')!==null) :
             File::delete(public_path($oldImage));
@@ -126,7 +111,7 @@ class ProductsController extends Controller
             $product->image = $oldImage;
         endif;
         $product->save();
-        return redirect('backend/products');
+        return redirect('backend/products')->with('message' , 'Product info updated !');
     }
 
     /**
@@ -141,8 +126,7 @@ class ProductsController extends Controller
         //delete product image
         $oldImage = $product->image;
         File::delete(public_path($oldImage));
-        
         $product->delete();
-        return back();
+        return back()->with('message' , 'Product erased !');
     }
 }

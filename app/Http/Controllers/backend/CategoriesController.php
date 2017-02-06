@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Http\Requests\StoreCategories;
 
 class CategoriesController extends Controller
 {
@@ -35,16 +36,16 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategories $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            ]);
+        // $this->validate($request, [
+        //     'name' => 'required|max:255',
+        //     ]);
         $category = new Category;
         $category->name = $request->name;
         $category->description = $request->description;
         $category->save();
-        return redirect('backend/categories');
+        return redirect('backend/categories')->with('message' , 'Category added !');
     }
 
     /**
@@ -66,14 +67,14 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategories $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            ]);
+        // $this->validate($request, [
+        //     'name' => 'required|max:255',
+        //     ]);
         $category = Category::find($id);
         $category->update($request->all());
-        return redirect('/backend/categories');
+        return redirect('/backend/categories')->with('message' , 'Category info updated !');
     }
 
     /**
@@ -86,6 +87,6 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-        return back();
+        return back()->with('message' , 'Category erased !');
     }
 }

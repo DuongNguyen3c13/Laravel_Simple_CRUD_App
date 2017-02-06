@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Requests\StoreUsers;
+use App\Http\Requests\UpdateUsers;
 class UsersController extends Controller
 {
     /**
@@ -35,21 +36,21 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUsers $request)
     {
-        $this->validate($request, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-        ]);
+        // $this->validate($request, [
+        //     'first_name' => 'required|max:255',
+        //     'last_name' => 'required|max:255',
+        //     'email' => 'required|email|max:255|unique:users',
+        //     'password' => 'required|min:6',
+        // ]);
         $user = new User();
         $user->email = $request->email;
         $user->password = $request->password;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->save();
-        return redirect('backend/users');  
+        return redirect('backend/users')->with('message' , 'User added !');  
     }
 
     /**
@@ -82,16 +83,16 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUsers $request, $id)
     {
-        $this->validate($request, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,email,'.$id,
-        ]);
+        // $this->validate($request, [
+        //     'first_name' => 'required|max:255',
+        //     'last_name' => 'required|max:255',
+        //     'email' => 'required|email|max:255|unique:users,email,'.$id,
+        // ]);
         $user = User::find($id);
         $user->update($request->all());
-        return redirect('/backend/users'); 
+        return redirect('/backend/users')->with('message' , 'User info updated !');
     }
 
     /**
@@ -104,7 +105,6 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return back();
-        return redirect('backend/users');
+        return back()->with('message' , 'User erased !');
     }
 }

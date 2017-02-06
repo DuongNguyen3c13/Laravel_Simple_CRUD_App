@@ -113,19 +113,6 @@
         <li ><a href="{{ url('/backend/users') }}"><i class="fa fa-link"></i> <span>Users Management</span></a></li>
         <li ><a href="{{ url('/backend/categories') }}"><i class="fa fa-link"></i> <span>Categories Management</span></a></li>
         <li ><a href="{{ url('/backend/products') }}"><i class="fa fa-link"></i> <span>Products Management</span></a></li>
-
-        <!-- Multilevel link - Save it for the future -->
-        <!-- <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li> -->
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -143,18 +130,24 @@
           <div class="box">
             @yield('box-header')
             <!-- open a box body tag here -->
-             @yield('content')
-             @if(count($errors) > 0)
-                <div class="row">
+            <!-- @if(count($errors) > 0)
+                <div class="row" style="color:red;">
                   <div class="col-md-6">
-                    <ul>
+                    <ul style="list-style: square;">
                       @foreach($errors->all() as $error)
                         <li>{{$error}}</li>
                       @endforeach
                     </ul>
                   </div>
                 </div>
-             @endif
+             @endif -->
+            @if(Session::has('message'))
+            <span class="help-block" style="color:red;">
+              <p>{{ Session::get('message') }}</p>
+            </span>
+            @endif
+             @yield('content')
+             
             <!-- /box-body -->
           </div>
           <!-- /.box -->

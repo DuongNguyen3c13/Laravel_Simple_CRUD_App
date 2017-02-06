@@ -37,18 +37,25 @@
               <td>{{ $product->id }}</td>
               <td>{{ $product->category->name }}</td>
               <td>{{ $product->name }}</td>
-              <td>{{ $product->price }} $</td>    
+              <td>{{ $product->price }} $</td> 
+                 <!-- display sale price -->
               @if($product->sale_price!=null)
               <td>{{ $product->sale_price }} $</td>
               @elseif($product->sale_price==null)
                  <td>No discount price </td>
-             @endif          
+             @endif 
+                <!--/display sale price  -->
               <td>{{ $product->description }}</td>
-              <td>{{ $product->status }}</td>
+              <!-- display status -->
+              @if($product->status == "available")
+              <td>{{ "Còn hàng" }}</td>
+              @else 
+              <td>{{ "Hết hàng" }}</td>
+              @endif
               <td>
                 @if(isset($product->image))
                   <!-- pop-up menu for image -->
-                  <a onclick="window.open('{{ asset($product->image) }}', '{{ $product->name }} image');">
+                  <a href="#" onclick="window.open('{{ asset($product->image) }}', '{{ $product->name }} image');">
                       <img src="{{ asset($product->image) }}" 
                             alt="{{ $product->name }} img" 
                             height="40" width="60" 
@@ -71,6 +78,7 @@
                   <th>Name</td>
                   <th>Price</td>
                   <th>Sale price</th>
+                  <th>Description</th>
                   <th>Status</th>
                   <th>Image</th>
                   <th></th>

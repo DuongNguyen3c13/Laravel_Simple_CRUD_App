@@ -244,7 +244,8 @@ a.item_add {
 /*--//banner--*/
 /*--content--*/
 .active-page {
-	background-color: #996f7c;
+	font-weight: bold;
+	background-color: #83cd38;
 }
 .content-top {
     padding: 5em 0;
